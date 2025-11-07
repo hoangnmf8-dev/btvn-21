@@ -57,11 +57,7 @@ const goodStudent = students.filter(
 );
 console.log("🚀 ~ goodStudent:", goodStudent);
 
-students.sort((a, b) => {
-  const avarageScoreA = calcAvarageScore(a);
-  const avarageScoreB = calcAvarageScore(b);
-  return avarageScoreB - avarageScoreA;
-});
+students.sort((a, b) => calcAvarageScore(b) - calcAvarageScore(a));
 console.log("🚀 ~ students:", students);
 console.log("===============================================");
 
