@@ -71,6 +71,7 @@
         </div>
         <pre class="line-numbers">
           <code class="language-javascript">//Bài 3
+          console.log("Bài 3:");
           const students = [
             { name: "Lan", scores: [8, 9, 7] },
             { name: "Huy", scores: [6, 5, 7] },
@@ -84,7 +85,12 @@
             ).toFixed(2);
           }
 
-          const avarageScore = students.map((student) => calcAvarageScore(student));
+          const avarageScore = students.map((student) => {
+            return {
+              ...student,
+              avarage_score: calcAvarageScore(student),
+            };
+          });
           console.log("🚀 ~ avarageScore:", avarageScore);
 
           const goodStudent = students.filter(
@@ -136,14 +142,18 @@
           },
         ];
 
-        posts.forEach((post) =>
-          console.log(`The post "${post.title}" has ${post.comments.length} comments`)
-        );
+        posts.forEach((post) => {
+          let str = `The post "${post.title}" has ${post.comments.length} `;
+          post.comments.length > 1 ? (str += "comments") : (str += "comment");
+          console.log(str);
+        });
 
         const tagsArr = [...new Set(posts.flatMap((post) => post.tags))];
         console.log("🚀 ~ tagsArr:", tagsArr);
 
-        const filterComments = posts.flatMap(post => post.comments.filter(item => item.user === "An").map(item => item.text));
+        const filterComments = posts.flatMap((post) =>
+          post.comments.filter((item) => item.user === "An").map((item) => item.text)
+        );
         console.log("🚀 ~ filterComments:", filterComments);</code>
       </pre>
       </section>
