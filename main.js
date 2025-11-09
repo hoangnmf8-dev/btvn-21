@@ -11,8 +11,9 @@ users.forEach((user) => console.log(user.name));
 const sortUsers = users.slice(0).sort((a, b) => b.age - a.age); //Không làm thay đổi mảng gốc
 console.log(sortUsers[0]);
 
-let avarageAge =
-  +(users.reduce((acc, user) => (acc += user.age), 0) / users.length).toFixed(2);
+let avarageAge = +(
+  users.reduce((acc, user) => (acc += user.age), 0) / users.length
+).toFixed(2);
 console.log("🚀 ~ avarageAge:", avarageAge);
 console.log("===============================================");
 
@@ -49,7 +50,12 @@ function calcAvarageScore(student) {
   ).toFixed(2);
 }
 
-const avarageScore = students.map((student) => calcAvarageScore(student));
+const avarageScore = students.map((student) => {
+  return {
+    ...student,
+    avarage_score: calcAvarageScore(student),
+  };
+});
 console.log("🚀 ~ avarageScore:", avarageScore);
 
 const goodStudent = students.filter(
@@ -92,12 +98,16 @@ const posts = [
   },
 ];
 
-posts.forEach((post) =>
-  console.log(`The post "${post.title}" has ${post.comments.length} comments`)
-);
+posts.forEach((post) => {
+  let str = `The post "${post.title}" has ${post.comments.length} `;
+  post.comments.length > 1 ? (str += "comments") : (str += "comment");
+  console.log(str);
+});
 
 const tagsArr = [...new Set(posts.flatMap((post) => post.tags))];
 console.log("🚀 ~ tagsArr:", tagsArr);
 
-const filterComments = posts.flatMap(post => post.comments.filter(item => item.user === "An").map(item => item.text));
+const filterComments = posts.flatMap((post) =>
+  post.comments.filter((item) => item.user === "An").map((item) => item.text)
+);
 console.log("🚀 ~ filterComments:", filterComments);
